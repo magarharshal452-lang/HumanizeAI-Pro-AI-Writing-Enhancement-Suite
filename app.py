@@ -3,16 +3,21 @@ import streamlit as st
 from humanizer import humanize
 from quality_checker import similarity_score
 
-st.title(
-    "AI Humanizer"
+st.set_page_config(
+    page_title="AI Humanizer",
+    page_icon="✍️",
+    layout="wide"
 )
 
+st.title("AI Humanizer")
+
 text = st.text_area(
-    "Paste text here"
+    "Paste your text here",
+    height=250
 )
 
 mode = st.selectbox(
-    "Mode",
+    "Select Humanization Mode",
     [
         "casual",
         "professional",
@@ -21,29 +26,29 @@ mode = st.selectbox(
     ]
 )
 
-if st.button(
-    "Humanize"
-):
+if st.button("Humanize"):
 
-    output = humanize(
-        text,
-        mode
-    )
+    if text.strip() == "":
+        st.warning("Please enter some text.")
+    else:
 
-    score = similarity_score(
-        text,
-        output
-    )
+        with st.spinner("Humanizing..."):
 
-    st.subheader(
-        "Humanized Text"
-    )
+            output = humanize(
+                text,
+                mode
+            )
 
-    st.write(
-        output
-    )
+            score = similarity_score(
+                text,
+                output
+            )
 
-    st.metric(
-        "Meaning Preservation %",
-        score
-    )
+        st.subheader("Humanized Text")
+
+        st.write(output)
+
+        st.metric(
+            "Meaning Preservation %",
+            score
+        )
