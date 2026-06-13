@@ -2,8 +2,8 @@ from transformers import pipeline
 from prompts import PROMPTS
 
 generator = pipeline(
-    "text-generation",
-    model="meta-llama/Meta-Llama-3-8B-Instruct"
+    "text2text-generation",
+    model="google/flan-t5-large"
 )
 
 def humanize(text, mode):
@@ -14,10 +14,9 @@ def humanize(text, mode):
 
     result = generator(
         prompt,
-        max_new_tokens=300,
+        max_length=512,
         do_sample=True,
-        temperature=0.7,
-        top_p=0.9
+        temperature=0.8
     )
 
     return result[0]["generated_text"]
