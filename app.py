@@ -1,109 +1,63 @@
 import streamlit as st
 
-# ----------------------------
-# Page Configuration
-# ----------------------------
 st.set_page_config(
     page_title="HumanizeAI Pro",
     page_icon="✍️",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
-# ----------------------------
-# Sidebar
-# ----------------------------
-st.sidebar.title("✍️ HumanizeAI Pro")
+st.title("✍️ HumanizeAI Pro")
+st.caption("Transform AI-generated text into natural human writing.")
 
-page = st.sidebar.radio(
-    "Navigation",
-    [
-        "🏠 Home",
-        "🤖 AI Humanizer",
-        "📊 Readability",
-        "📄 Export",
-        "ℹ️ About"
-    ]
-)
+col1, col2 = st.columns(2)
 
-# ----------------------------
-# Home Page
-# ----------------------------
-if page == "🏠 Home":
+with col1:
 
-    st.title("HumanizeAI Pro")
-
-    st.markdown("""
-### Welcome 👋
-
-HumanizeAI Pro is an AI-powered writing enhancement platform.
-
-### Features
-
-- ✨ AI Humanizer
-- 📊 Readability Analysis
-- 📄 Export to TXT
-- 📄 Export to PDF
-- 📄 Export to DOCX
-- 📝 Multiple Writing Styles
-- 🎯 Meaning Preservation
-- 📈 Humanization Score
-""")
-
-# ----------------------------
-# Humanizer Page
-# ----------------------------
-elif page == "🤖 AI Humanizer":
-
-    st.title("AI Humanizer")
+    st.subheader("Input")
 
     style = st.selectbox(
         "Writing Style",
         [
             "Academic",
+            "Assignment",
+            "Research Paper",
             "Professional",
-            "Casual",
-            "Creative"
+            "Casual"
         ]
     )
 
-    user_text = st.text_area(
-        "Paste your text here",
-        height=250
+    input_text = st.text_area(
+        "Paste AI-generated text",
+        height=350,
+        placeholder="Paste your AI-generated content here..."
     )
 
-    if st.button("✨ Humanize Text"):
-        st.info("Humanization engine will be added in the next step.")
+    humanize = st.button(
+        "✨ Humanize Text",
+        use_container_width=True
+    )
 
-# ----------------------------
-# Readability
-# ----------------------------
-elif page == "📊 Readability":
+with col2:
 
-    st.title("Readability Analysis")
+    st.subheader("Humanized Output")
 
-    st.info("Coming Soon")
+    output = st.text_area(
+        "",
+        height=350,
+        placeholder="Your humanized text will appear here...",
+        key="output"
+    )
 
-# ----------------------------
-# Export
-# ----------------------------
-elif page == "📄 Export":
+    st.button(
+        "📋 Copy Humanized Text",
+        use_container_width=True
+    )
 
-    st.title("Export")
+st.divider()
 
-    st.info("Coming Soon")
+c1, c2, c3, c4 = st.columns(4)
 
-# ----------------------------
-# About
-# ----------------------------
-elif page == "ℹ️ About":
-
-    st.title("About HumanizeAI Pro")
-
-    st.write("""
-Version: 2.0
-
-Developed by Harshal Magar
-
-Built with Streamlit.
-""")
+c1.metric("Words", 0)
+c2.metric("Characters", 0)
+c3.metric("Reading Time", "0 min")
+c4.metric("Quality", "--")
