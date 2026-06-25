@@ -1,5 +1,54 @@
 import streamlit as st
+st.markdown("""
+<style>
 
+/* Main App */
+.main{
+    padding-top:20px;
+}
+
+/* Hide Streamlit Branding */
+#MainMenu{
+    visibility:hidden;
+}
+footer{
+    visibility:hidden;
+}
+header{
+    visibility:hidden;
+}
+
+/* Buttons */
+.stButton>button{
+    width:100%;
+    height:52px;
+    border-radius:12px;
+    border:none;
+    background:#4F46E5;
+    color:white;
+    font-size:17px;
+    font-weight:600;
+}
+
+.stButton>button:hover{
+    background:#4338CA;
+}
+
+/* Text Area */
+textarea{
+    border-radius:12px !important;
+}
+
+/* Metrics */
+[data-testid="metric-container"]{
+    border-radius:12px;
+    padding:15px;
+    border:1px solid #E5E7EB;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+</style>
+""", unsafe_allow_html=True)
 st.set_page_config(
     page_title="HumanizeAI Pro",
     page_icon="✍️",
